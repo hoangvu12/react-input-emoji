@@ -29,7 +29,8 @@
   "peerDependencies": {
     "prop-types": ">=15.7.2",
     "react": ">=17.0.x",
-    "react-dom": ">=17.0.x"
+    "react-dom": ">=17.0.x",
+    "emoji-mart": "npm:emoji-mart-lazyload"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.3",
@@ -72,8 +73,5 @@
   },
   "files": [
     "dist"
-  ],
-  "dependencies": {
-    "emoji-mart": "3.0.1"
-  }
+  ]
 }
