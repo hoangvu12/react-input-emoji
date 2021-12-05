@@ -24,9 +24,7 @@
     "test:watch": "jest --watch",
     "build": "rollup -c",
     "start": "rollup -c -w",
-    "prepare": "yarn run build",
-    "predeploy": "cd example && yarn install && yarn run build",
-    "deploy": "gh-pages -d example/build"
+    "prepare": "yarn run build"
   },
   "peerDependencies": {
     "prop-types": ">=15.7.2",
