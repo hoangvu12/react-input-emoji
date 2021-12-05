@@ -1,14 +1,17 @@
 // vendors
-import React, { memo, useMemo } from "react";
+import React, { memo } from "react";
 import { Picker } from "emoji-mart";
 import t from "prop-types";
 import "emoji-mart/css/emoji-mart.css";
 
 /**
+ * @typedef {import('emoji-mart').PickerProps} PickerProps
+ */
+
+/**
  * @typedef {object} Props
  * @property {function(import("../types/types").EmojiMartItem): void} onSelectEmoji
- * @property {boolean} disableRecent
- * @property {object[]} customEmojis
+ * @extends {PickerProps}
  */
 
 /**
@@ -16,28 +19,8 @@ import "emoji-mart/css/emoji-mart.css";
  * @param {Props} props
  * @return {React.FC}
  */
-function EmojiPicker({ onSelectEmoji, disableRecent, customEmojis }) {
-  const excluePicker = useMemo(() => {
-    /** @type import("emoji-mart").CategoryName[] */
-    const exclude = [];
-
-    if (disableRecent) {
-      exclude.push("recent");
-    }
-
-    return exclude;
-  }, [disableRecent]);
-
-  return (
-    <Picker
-      showPreview={false}
-      showSkinTones={false}
-      set="apple"
-      onSelect={onSelectEmoji}
-      exclude={excluePicker}
-      custom={customEmojis}
-    />
-  );
+function EmojiPicker({ onSelectEmoji, ...props }) {
+  return <Picker {...props} onSelect={onSelectEmoji} />;
 }
 
 EmojiPicker.propTypes = {

@@ -35,6 +35,10 @@ import { usePollute } from "./hooks/user-pollute";
  */
 
 /**
+ * @typedef {import('emoji-mart').PickerProps} PickerProps
+ */
+
+/**
  * @typedef {object} Props
  * @property {string} value
  * @property {(value: string) => void} onChange
@@ -48,15 +52,14 @@ import { usePollute } from "./hooks/user-pollute";
  * @property {boolean} keepOpenend
  * @property {(event: KeyboardEvent) => void} onKeyDown
  * @property {string} inputClass
- * @property {boolean} disableRecent
  * @property {number} tabIndex
  * @property {number} height
  * @property {number} borderRadius
  * @property {string} borderColor
  * @property {number} fontSize
  * @property {string} fontFamily
- * @property {object[]=} customEmojis
  * @property {(text: string) => Promise<MetionUser[]>=} searchMention
+ * @property {PickerProps} pickerProps
  */
 
 /**
@@ -78,16 +81,15 @@ function InputEmoji(
     maxLength,
     keepOpenend,
     inputClass,
-    disableRecent,
     tabIndex,
     value,
-    customEmojis,
     searchMention,
     // style
     borderRadius,
     borderColor,
     fontSize,
-    fontFamily
+    fontFamily,
+    pickerProps
   },
   ref
 ) {
@@ -186,7 +188,18 @@ function InputEmoji(
     return () => {
       unsubscribe();
     };
-  }, [addEventListener, cleanOnEnter, emitChange, listeners.enter.currentListerners.length, maxLength, onEnter, onKeyDown, sanitize, sanitizedTextRef, updateHTML]);
+  }, [
+    addEventListener,
+    cleanOnEnter,
+    emitChange,
+    listeners.enter.currentListerners.length,
+    maxLength,
+    onEnter,
+    onKeyDown,
+    sanitize,
+    sanitizedTextRef,
+    updateHTML
+  ]);
 
   useEffect(() => {
     /** */
@@ -285,11 +298,10 @@ function InputEmoji(
       />
       <EmojiPickerWrapper
         keepOpenend={keepOpenend}
-        disableRecent={disableRecent}
-        customEmojis={customEmojis}
         addSanitizeFn={addSanitizeFn}
         addPolluteFn={addPolluteFn}
         appendContent={appendContent}
+        pickerProps={pickerProps}
       />
     </div>
   );
@@ -304,8 +316,7 @@ InputEmojiWithRef.defaultProps = {
   borderColor: "#EAEAEA",
   fontSize: 15,
   fontFamily: "sans-serif",
-  tabIndex: 0,
-  customEmojis: []
+  tabIndex: 0
 };
 
 export default InputEmojiWithRef;

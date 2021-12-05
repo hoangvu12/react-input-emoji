@@ -19,24 +19,26 @@ import EmojiPicker from "./emoji-picker";
  */
 
 /**
+ * @typedef {import('emoji-mart').PickerProps} PickerProps
+ */
+
+/**
  * @typedef {Object} Props
  * @property {boolean} keepOpenend
- * @property {boolean} disableRecent
- * @property {object[]=} customEmojis
  * @property {(fn: SanitizeFn) => void} addSanitizeFn
  * @property {(fn: PolluteFn) => void} addPolluteFn
  * @property {(html: string) => void} appendContent
+ * @property {PickerProps} pickerProps
  */
 
 // eslint-disable-next-line valid-jsdoc
 /** @type {React.FC<Props>} */
 const EmojiPickerWrapper = ({
   keepOpenend,
-  disableRecent,
-  customEmojis,
   addSanitizeFn,
   addPolluteFn,
-  appendContent
+  appendContent,
+  pickerProps
 }) => {
   const [showPicker, setShowPicker] = useState(false);
 
@@ -108,19 +110,16 @@ const EmojiPickerWrapper = ({
             onClick={evt => evt.stopPropagation()}
           >
             <div className="react-emoji-picker">
-              <EmojiPicker
-                onSelectEmoji={handleSelectEmoji}
-                disableRecent={disableRecent}
-                customEmojis={customEmojis}
-              />
+              <EmojiPicker {...pickerProps} onSelectEmoji={handleSelectEmoji} />
             </div>
           </div>
         )}
       </div>
       <button
         type="button"
-        className={`react-input-emoji--button${showPicker ? " react-input-emoji--button__show" : ""
-          }`}
+        className={`react-input-emoji--button${
+          showPicker ? " react-input-emoji--button__show" : ""
+        }`}
         onClick={toggleShowPicker}
       >
         <svg
