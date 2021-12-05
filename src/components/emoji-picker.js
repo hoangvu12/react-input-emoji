@@ -2,7 +2,7 @@
 import React, { memo } from "react";
 import { Picker } from "emoji-mart";
 import t from "prop-types";
-import "emoji-mart/css/emoji-mart.css";
+// import "emoji-mart/css/emoji-mart.css";
 
 /**
  * @typedef {import('emoji-mart').PickerProps} PickerProps
